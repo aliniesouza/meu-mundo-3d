@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Mundo 3D — Portfólio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #0d0d1a;
+    --card: #13132a;
+    --border: rgba(255,255,255,0.07);
+    --text: #ffffff;
+    --muted: rgba(255,255,255,0.45);
+    --grad: linear-gradient(90deg, #ff6ec7, #ffb347, #87ceeb, #00fa9a);
+    --pink: #ff6ec7;
+    --orange: #ffb347;
+    --blue: #87ceeb;
+    --green: #00fa9a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,13,26,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-size: 18px;
+    font-weight: 800;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1.5px;
+  }
+
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 130px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(255,110,199,0.12) 0%, rgba(135,206,235,0.06) 50%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 5px 18px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,110,199,0.3);
+    background: rgba(255,110,199,0.08);
+    font-size: 12px;
+    color: var(--pink);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: 54px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: var(--grad);
+    color: #0d0d1a;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+  .btn-secondary {
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--pink); transform: translateY(-2px); }
+
+  /* ─── STATS ─── */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 0 40px 70px;
+    flex-wrap: wrap;
+  }
+
+  .stat { text-align: center; }
+  .stat-number {
+    font-size: 36px;
+    font-weight: 800;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 40px;
+  }
+
+  /* ─── PORTFOLIO SECTION ─── */
+  .portfolio-section {
+    padding: 70px 40px;
+  }
+
+  .section-header { text-align: center; margin-bottom: 40px; }
+  .section-header h2 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+  .section-header h2 span {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .section-header p { font-size: 14px; color: var(--muted); }
+
+  /* ─── FILTER TABS ─── */
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 22px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .filter-btn:hover {
+    border-color: rgba(255,110,199,0.4);
+    color: var(--text);
+  }
+
+  .filter-btn.active {
+    background: linear-gradient(90deg, #ff6ec7, #ffb347);
+    border-color: transparent;
+    color: #0d0d1a;
+    font-weight: 700;
+  }
+
+  /* ─── PRODUCT GRID ─── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    background: #1a1a30;
+  }
+
+  /* placeholder when no image */
+  .product-image-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    background: linear-gradient(135deg, #1a1a30, #12122a);
+    color: rgba(255,255,255,0.15);
+    gap: 8px;
+  }
+
+  .placeholder-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.15);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .product-info {
+    padding: 16px 18px 18px;
+  }
+
+  .product-category-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+
+  .tag-porta-caneta { background: rgba(255,110,199,0.12); color: var(--pink); border: 1px solid rgba(255,110,199,0.25); }
+  .tag-chaveiro { background: rgba(255,215,0,0.1); color: #ffd700; border: 1px solid rgba(255,215,0,0.2); }
+  .tag-decoracao { background: rgba(135,206,235,0.1); color: var(--blue); border: 1px solid rgba(135,206,235,0.2); }
+  .tag-personalizado { background: rgba(0,250,154,0.1); color: var(--green); border: 1px solid rgba(0,250,154,0.2); }
+
+  .product-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+
+  .product-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .product-custom-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+    font-size: 10px;
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  /* hidden when filter active */
+  .product-card.hidden { display: none; }
+
+  /* ─── CONTACT SECTION ─── */
+  .contact-section {
+    padding: 70px 40px;
+    text-align: center;
+  }
+
+  .contact-section h2 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+  .contact-section p { font-size: 14px; color: var(--muted); margin-bottom: 40px; }
+
+  .contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    transition: transform 0.2s, border-color 0.2s;
+    min-width: 240px;
+  }
+
+  .contact-card:hover { transform: translateY(-4px); border-color: rgba(255,110,199,0.3); }
+
+  .contact-icon-wrap {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .icon-wa { background: linear-gradient(135deg, #25d366, #128c7e); }
+  .icon-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+  .contact-card-text { text-align: left; }
+  .contact-card-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+  .contact-card-value { font-size: 15px; font-weight: 600; color: var(--text); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-brand {
+    font-size: 15px;
+    font-weight: 700;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-copy { font-size: 12px; color: var(--muted); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 14px; }
+    .hero { padding: 110px 20px 60px; }
+    .hero h1 { font-size: 34px; }
+    .stats { gap: 30px; }
+    .portfolio-section, .contact-section { padding: 50px 20px; }
+    footer { padding: 20px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-brand">MEU MUNDO 3D</div>
+  <div class="nav-links">
+    <a href="#portfolio">Produtos</a>
+    <a href="#contato">Contato</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✨ Impressão 3D Artesanal</div>
+  <h1>Objetos únicos<br><span>feitos com carinho</span></h1>
+  <p>Porta-canetas, chaveiros e muito mais — criados com impressão 3D e personalizados especialmente para você.</p>
+  <div class="hero-btns">
+    <a href="#portfolio" class="btn-primary">Ver produtos</a>
+    <a href="#contato" class="btn-secondary">Fazer pedido</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-number">2</div>
+    <div class="stat-label">Categorias</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">6+</div>
+    <div class="stat-label">Modelos</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">∞</div>
+    <div class="stat-label">Cores disponíveis</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <div class="section-header">
+    <h2>Nosso <span>Portfólio</span></h2>
+    <p>Clique nas categorias para filtrar os produtos</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterProducts('todos')">Todos</button>
+    <button class="filter-btn" onclick="filterProducts('porta-caneta')">🖊️ Porta-canetas</button>
+    <button class="filter-btn" onclick="filterProducts('chaveiro')">🔑 Chaveiros</button>
+    <button class="filter-btn" onclick="filterProducts('personalizado')">✏️ Personalizáveis</button>
+  </div>
+
+  <div class="grid" id="product-grid">
+
+    <!-- PRODUTO 1 -->
+    <div class="product-card" data-category="porta-caneta">
+      <div class="product-image-placeholder">
+        🦛
+        <span class="placeholder-text">Foto em breve</span>
+      </div>
+      <div class="product-info">
+        <span class="product-category-tag tag-porta-caneta">Porta-caneta</span>
+        <div class="product-name">Capivara Fofa</div>
+        <div class="product-desc">Porta-caneta em formato de capivara. Delicado e cheio de personalidade.</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 2 -->
+    <div class="product-card" data-category="porta-caneta personalizado">
+      <div class="product-image-placeholder">
+        👟
+        <span class="placeholder-text">Foto em breve</span>
+      </div>
+      <div class="product-info">
+        <span class="product-category-tag tag-porta-caneta">Porta-caneta</span>
+        <div class="product-name">Tênis Personalizado</div>
+        <div class="product-desc">Disponível em várias cores. Pode levar seu nome gravado!</div>
+        <div class="product-custom-badge">✏️ Personalizável</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 3 -->
+    <div class="product-card" data-category="porta-caneta">
+      <div class="product-image-placeholder">
+        🧥
+        <span class="placeholder-text">Foto em breve</span>
+      </div>
+      <div class="product-info">
+        <span class="product-category-tag tag-porta-caneta">Porta-caneta</span>
+        <div class="product-name">Jaqueta Inflável</div>
+        <div class="product-desc">Design criativo inspirado em uma jaqueta puffer. Moderno e divertido.</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 4 -->
+    <div class="product-card" data-category="porta-caneta">
+      <div class="product-image-placeholder">
+        ☁️
+        <span class="placeholder-text">Foto em breve</span>
+      </div>
+      <div class="product-info">
+        <span class="product-category-tag tag-porta-caneta">Porta-caneta</span>
+        <div class="product-name">Nuvem Sorridente</div>
+        <div class="product-desc">Kawaii e encantador. Perfeito para deixar a mesa mais alegre.</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 5 -->
+    <div class="product-card" data-category="chaveiro">
+      <div class="product-image-placeholder">
+        🎮
+        <span class="placeholder-text">Foto em breve</span>
+      </div>
+      <div class="product-info">
+        <span class="product-category-tag tag-chaveiro">Chaveiro</span>
+        <div class="product-name">Chaveiros Geek</div>
+        <div class="product-desc">Pokébola, estrela Mario, bloco surpresa — perfeito para colecionadores!</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 6 -->
+    <div class="product-card" data-category="chaveiro personalizado">
+      <div class="product-image-placeholder">
+        🌸
+        <span class="placeholder-text">Foto em breve</span>
+      </div>
+      <div class="product-info">
+        <span class="product-category-tag tag-chaveiro">Chaveiro</span>
+        <div class="product-name">Chaveiro Floral com Inicial</div>
+        <div class="product-desc">Chaveiro com sua inicial em formato de flor. Delicado e único.</div>
+        <div class="product-custom-badge">✏️ Personalizável</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         NOVOS PRODUTOS SERÃO ADICIONADOS AQUI
+         Para adicionar: copie um bloco <div class="product-card">
+         e cole antes deste comentário
+    ═══════════════════════════════════════════════════════════ -->
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contato">
+  <h2>Vamos criar algo <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">especial?</span></h2>
+  <p>Fale comigo para fazer seu pedido ou tirar dúvidas sobre personalização.</p>
+
+  <div class="contact-cards">
+    <a class="contact-card" href="https://wa.me/5514998085168" target="_blank">
+      <div class="contact-icon-wrap icon-wa">💬</div>
+      <div class="contact-card-text">
+        <div class="contact-card-label">WhatsApp</div>
+        <div class="contact-card-value">(14) 99808-5168</div>
+      </div>
+    </a>
+    <a class="contact-card" href="https://instagram.com/meu_mundo3d" target="_blank">
+      <div class="contact-icon-wrap icon-ig">📸</div>
+      <div class="contact-card-text">
+        <div class="contact-card-label">Instagram</div>
+        <div class="contact-card-value">@meu_mundo3d</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">MEU MUNDO 3D</div>
+  <div class="footer-copy">Feito com carinho em impressão 3D 💗</div>
+</footer>
+
+<!-- FILTER SCRIPT -->
+<script>
+  function filterProducts(category) {
+    // Update buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Filter cards
+    document.querySelectorAll('.product-card').forEach(card => {
+      const cats = card.dataset.category || '';
+      if (category === 'todos' || cats.includes(category)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
